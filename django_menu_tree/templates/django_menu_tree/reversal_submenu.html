@@ -1,0 +1,6 @@
+<ul>
+  {% for item in submenu.values %}
+    {% include 'django_menu_tree/link_resolver.html' with submenu=item request=request only %}
+    {% include 'django_menu_tree/reversal_submenu.html' with submenu=item.children request=request only %}
+  {% endfor %}
+</ul>

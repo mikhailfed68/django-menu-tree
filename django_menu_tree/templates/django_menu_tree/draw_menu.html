@@ -1,0 +1,9 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'django_menu_tree/menu_style.css' %}">
+
+<ul>
+  {% for submenu in menu.values %}
+    {% include 'django_menu_tree/link_resolver.html' with submenu=submenu request=request only %}
+    {% include 'django_menu_tree/reversal_submenu.html' with submenu=submenu.children request=request only %}
+  {% endfor %}
+</ul>

@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "django-menu-tree"
+version = "0.1.0"
+description = "Django app for creating menus"
+authors = ["Mikhail Fedorov <mikhailfedorov1939@gmail.com>"]
+readme = "README.md"
+packages = [{include = "django_menu_tree"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

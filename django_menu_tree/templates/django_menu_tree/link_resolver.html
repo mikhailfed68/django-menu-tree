@@ -1,0 +1,9 @@
+<li>
+  <a href="{{ submenu.url }}"
+    {% if request.path == submenu.url or request.build_absolute_uri == submenu.url %}
+    class="active"
+    {% endif %}
+  >
+    {{ submenu.name }}
+  </a>
+</li>
