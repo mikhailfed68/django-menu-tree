@@ -2,6 +2,12 @@ from django.db import models
 
 
 class Menu(models.Model):
+    """
+    Menu model.
+
+    'url' - allows you to insert any url to your menu that you want.
+    'url' and 'use_named_url' are mutually exclusive.
+    """
     name = models.CharField(max_length=100)
     url = models.CharField(
         'Custom URL',

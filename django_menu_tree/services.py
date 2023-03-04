@@ -4,6 +4,8 @@ from django_menu_tree.models import Menu
 
 
 def get_menu_from_db(menu_name):
+    """Gets the menu and its sub-items using a recursive query."""
+
     return Menu.objects.raw(
         f"""
         WITH RECURSIVE r AS (
@@ -13,7 +15,12 @@ def get_menu_from_db(menu_name):
 
             UNION ALL
 
-            SELECT django_menu_tree_menu.id, django_menu_tree_menu.parent_id, django_menu_tree_menu.name, django_menu_tree_menu.url, django_menu_tree_menu.use_named_url, r.level + 1 AS level
+            SELECT django_menu_tree_menu.id,
+            django_menu_tree_menu.parent_id,
+            django_menu_tree_menu.name,
+            django_menu_tree_menu.url,
+            django_menu_tree_menu.use_named_url,
+            r.level + 1 AS level
             FROM django_menu_tree_menu
                 JOIN r
                     ON django_menu_tree_menu.parent_id = r.id
@@ -25,12 +32,16 @@ def get_menu_from_db(menu_name):
 
 
 def build_named_url(node, named_url):
+    """Builds a named url if it exists."""
+
     if node.use_named_url and named_url is not None:
         return reverse(named_url, kwargs={'pk': node.id})
     return node.url
 
 
 def record(tree, submenu):
+    """Records a sub-item in the tree according to its parent_id field."""
+
     if tree.get(str(submenu.parent_id)):
         tree[str(submenu.parent_id)]['children'][str(submenu.id)] = dict(
             id=submenu.id,
@@ -48,6 +59,11 @@ def record(tree, submenu):
 
 
 def build_menu_tree(menu, request):
+    """
+    Builds a tree menu using a multidimensional
+    dictionary as the data structure.
+    """
+
     menu_tree = {}
 
     for submenu in menu:
