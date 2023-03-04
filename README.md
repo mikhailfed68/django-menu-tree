@@ -1,7 +1,7 @@
-Django-menu-tree
+django-menu-tree
 =====
 
-Django-menu-tree is a Django app for creating menus and storing them in a database.
+django-menu-tree is a Django app for creating menus and storing them in a database.
 It allows you to retrieve the entire tree menu in one query to the database.
 
 
