@@ -2,9 +2,15 @@ from django.db import models
 
 
 class Menu(models.Model):
-    name = models.CharField(max_length=50)
-    url = models.CharField('Custom URL', max_length=160, blank=True, null=True, help_text="You must not set the 'use_named_url' flag")
-    use_named_url = models.BooleanField()
+    name = models.CharField(max_length=100)
+    url = models.CharField(
+        'Custom URL',
+        max_length=250,
+        blank=True,
+        null=True,
+        help_text="If you use custom url нou must not set the 'use_named_url' flag"
+    )
+    use_named_url = models.BooleanField(help_text="Required True if you use 'named url'")
     parent = models.ForeignKey(
         'self',
         null=True,
