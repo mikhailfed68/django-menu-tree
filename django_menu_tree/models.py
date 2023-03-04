@@ -8,9 +8,12 @@ class Menu(models.Model):
         max_length=250,
         blank=True,
         null=True,
-        help_text="If you use custom url нou must not set the 'use_named_url' flag"
+        help_text="If you use custom url you must not set the 'use_named_url' flag"
     )
-    use_named_url = models.BooleanField(help_text="Required True if you use 'named url'")
+    use_named_url = models.BooleanField(
+        default=True,
+        help_text="Required True if you use 'named url'",
+    )
     parent = models.ForeignKey(
         'self',
         null=True,
